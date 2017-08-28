@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mosi.tdpsync"
+    android:installLocation="auto">
+
+    <!-- Red -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Autenticacion -->
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <!-- Sincronización -->
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+
+    <!--Para que la app pueda ser movida a la tarjeta externa (SD)-->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_purchase_order"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.LogIn"
+            android:label="@string/btn_login" />
+        <activity android:name=".ui.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.Compania_Cliente"
+            android:label="@string/Seleccion" />
+        <activity
+            android:name=".ui.Toma_De_Pedido"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.insert_pedidos"
+            android:label="@string/Agregar" />
+        <activity
+            android:name=".ui.Buscar_pedidos"
+            android:label="@string/buscar" />
+
+        <!-- PROVIDER -->
+        <provider
+            android:name=".sqlite.ProviderPedidos"
+            android:authorities="com.mosi.tdpsync"
+            android:exported="true"
+            android:icon="@mipmap/ic_purchase_order"
+            android:syncable="true" />
+        <!-- SERVICIO DE AUTENTICACIÓN -->
+        <service android:name=".sync.AuthenticationService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+
+        <!-- SERVICIO DE SINCRONIZACIÓN -->
+        <service
+            android:name=".sync.SyncService"
+            android:exported="true"
+            android:icon="@mipmap/ic_purchase_order">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/sync_adapter" />
+        </service>
+
+        <activity
+            android:name=".ui.Toma_Pedido"
+            android:icon="@mipmap/ic_purchase_order"
+            android:label="@string/title_activity_toma__pedido"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.Menu_Principal" />
+        <activity
+            android:name=".ui.Iniciar_Sesion"
+            android:label="@string/title_activity_iniciar__sesion"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.ImagenProducto" />
+        <activity android:name=".ui.ConsultaPrecio"></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:All4One="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/custome_menu"
+        android:title="Menu"
+        android:icon="@mipmap/more"
+        All4One:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/cancel"
+                android:icon="@mipmap/cancel_file"
+                android:title="cancelar Pedido"/>
+
+            <item
+                android:id="@+id/finalizar_pedido"
+                android:icon="@mipmap/approval"
+                android:title="@string/action_end"/>
+
+        </menu>
+
+        </item>>
+
+</menu>

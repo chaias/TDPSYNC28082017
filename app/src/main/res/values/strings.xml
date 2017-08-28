@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">Toma De Pedido</string>
+    <string name="LogIn">Iniciar Sesion</string>
+    <string name="Seleccion">Compañia y Cliente</string>
+    <string name="Agregar">Agregar Producto</string>
+    <string name="buscar">Busqueda de Pedido</string>
+    <string name="correlativos">CORRELATIVO:</string>
+
+    <string name="correlativo_final">Ultimo Correaltivo:</string>
+    <string name="hint_usuario">Usuario</string>
+    <string name="hint_password">Password</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="hint_name">Fullname</string>
+    <string name="hint_compania">Compañia</string>
+    <string name="hint_cliente">Cliente</string>
+    <string name="compania">COMPAÑIA:</string>
+    <string name="cliente">CLIENTE:</string>
+    <string name="btn_login">Iniciar Sesion</string>
+    <string name="btn_Continuar">CONTINUAR</string>
+    <string name="btn_register">REGISTER</string>
+    <string name="btn_link_to_register">Not a member? Sign up now.</string>
+    <string name="btn_link_to_login">Already registred! Login Me.</string>
+    <string name="welcome">Welcome</string>
+    <string name="btn_logout">LOGOUT</string>
+    <string name="name">Fullname</string>
+    <string name="hint_producto">Producto</string>
+    <string name="hint_bonificaciones">Bonificaciones</string>
+    <string name="hint_cantidad">Cantidad</string>
+    <string name="bnt_insert">Agregar</string>
+    <string name="title_activity_insert__usuario">Insert_Usuario</string>
+    <string name="hint_buscar">Ingresa el correlativo del pedido</string>
+    <string name="btn_buscar">Buscar Pedido</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="action_sync">Sincronizacion</string>
+    <string name="action_end">Finalizar Pedido</string>
+    <string name="Id_dispositivo">ID DISPOSITIVO</string>
+    <string name="mosi">Mosi ®</string>
+    <string name="correlativo">Correlativo</string>
+    <string name="total">0.00</string>
+    <string name="anulado">Anulado</string>
+    <string name="precios">Consulta de Precios</string>
+    <string name="sincronizado">Sincronizado</string>
+    <string name="totalq">TOTAL Q.</string>
+    <string name="pedidonuevo">Pedido Nuevo</string>
+    <string name="buscarpedido">Busqueda de Pedido</string>
+    <string name="sincronizar">Sincronizar</string>
+
+
+    ///PARA SINCRONIZACION
+    <string name="provider_authority">com.mosi.tdpsync</string>
+    <string name="account_type">com.mosi.tdpsync.account</string>
+    <string name="title_activity_toma__pedido">Toma_Pedido</string>
+    <string name="title_activity_iniciar__sesion">Iniciar Sesion</string>
+
+    <string name="hintfiltro">Filtro de Productos</string>
+
+</resources>

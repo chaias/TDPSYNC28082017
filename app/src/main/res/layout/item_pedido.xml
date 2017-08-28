@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/descripcion"
+        android:id="@+id/twv_descripcion"
+        android:textSize="@dimen/descripcion"
+        android:textColor="@color/input_login"
+        android:layout_below="@+id/twv_cantidad_x_precio"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/twv_cantidad_x_precio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="P/C"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimary"
+        android:typeface="sans" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/input_login"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Bonificacion: 00000"
+        android:id="@+id/twv_bonificacion"
+        android:layout_alignBaseline="@+id/twv_cantidad"
+        android:layout_alignBottom="@+id/twv_cantidad"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Cantidad: 000000"
+        android:textColor="@color/input_login"
+        android:id="@+id/twv_cantidad"
+        android:layout_alignBaseline="@+id/twv_precio"
+        android:layout_alignBottom="@+id/twv_precio"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Precio: 000000.00"
+        android:textColor="@color/input_login"
+        android:id="@+id/twv_precio"
+        android:layout_marginTop="7dp"
+        android:layout_below="@+id/twv_descripcion"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
