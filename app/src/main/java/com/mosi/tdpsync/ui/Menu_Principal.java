@@ -118,10 +118,16 @@ public class Menu_Principal extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
+//pdqkgf29ue
 
+            //codigo uber de Luis Rosal
+                //
+
+
+            //43906777
             try{
-                SyncAdapter.sincronizarAhora(Menu_Principal.this,false);
-                SyncAdapter.sincronizarAhora(Menu_Principal.this, true);
+                SyncAdapter.sincronizarAhora(Menu_Principal.this,true);
+                SyncAdapter.sincronizarAhora(Menu_Principal.this, false);
                 Thread.sleep(35000);
             }catch(Exception e){
                 e.printStackTrace();
