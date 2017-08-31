@@ -41,7 +41,7 @@ public class Menu_Principal extends AppCompatActivity {
         bnt_pedido_nuevo = (Button)findViewById(R.id.bnt_pedido_nvo);
         bnt_buscar_pedido = (Button)findViewById(R.id.bnt_buscar_pedido);
         bnt_sincronizar = (Button)findViewById(R.id.bnt_sincronizar);
-        bnt_consultaprecios = (Button)findViewById(R.id.bnt_consultaprecios);
+       // bnt_consultaprecios = (Button)findViewById(R.id.bnt_consultaprecios);
         img_bnt_salir = (ImageButton)findViewById(R.id.img_salir);
 
         usuariologueado = getIntent().getStringExtra("usuario");
@@ -49,7 +49,7 @@ public class Menu_Principal extends AppCompatActivity {
         bnt_pedido_nuevo.setTypeface(TF);
         bnt_buscar_pedido.setTypeface(TF);
         bnt_sincronizar.setTypeface(TF);
-        bnt_consultaprecios.setTypeface(TF);
+//        bnt_consultaprecios.setTypeface(TF);
 
 
         bnt_pedido_nuevo.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +102,7 @@ public class Menu_Principal extends AppCompatActivity {
             }
         });
 
-        bnt_consultaprecios.setOnClickListener(new View.OnClickListener() {
+        /*bnt_consultaprecios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent().setClass(
@@ -110,7 +110,7 @@ public class Menu_Principal extends AppCompatActivity {
                 mainIntent.putExtra("usuario" , usuariologueado);
                 startActivity(mainIntent);
             }
-        });
+        });*/
 
     }
 

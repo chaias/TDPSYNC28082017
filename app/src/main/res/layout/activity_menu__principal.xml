@@ -80,23 +80,6 @@
         android:src="@mipmap/mosilogosplash"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp" />
+        android:layout_marginTop="24dp" />
 
-    <Button
-        android:id="@+id/bnt_consultaprecios"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bnt_sincronizar"
-        android:drawableLeft="@mipmap/precios"
-        android:layout_marginTop="5dp"
-        android:padding="5dp"
-        android:gravity="center"
-        android:textSize="18dp"
-        android:background="@color/white"
-        android:text="@string/precios"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/input_register_hint"
-        android:layout_alignParentEnd="true" />
 </RelativeLayout>

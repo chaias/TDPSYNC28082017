@@ -2306,6 +2306,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
+                                System.out.println("Response Json " +response);
                                 procesarRespuestaGetPr1tab(response, syncResult);
                             }
                         },

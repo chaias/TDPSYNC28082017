@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,7 @@ import com.mosi.tdpsync.item.item_pedido;
 import com.mosi.tdpsync.sqlite.BaseDatosPedidos;
 import com.mosi.tdpsync.sqlite.ContratoPedidos;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -93,8 +95,7 @@ public class Buscar_pedidos extends AppCompatActivity {
                         boolean valida_pedido = existePedido(valor_caja);
                         System.out.println("valida_pedido = " + valida_pedido);
 
-                        if (valida_pedido) {
-
+                        if (valida_pedido!=true) {
                             Toast existe = Toast.makeText(getApplicationContext(), "El pedido que usted esta buscando no existe \n por favor intente con otro pedido.", Toast.LENGTH_LONG);
                             existe.show();
                         } else {
@@ -103,23 +104,15 @@ public class Buscar_pedidos extends AppCompatActivity {
                             InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
                             inputMethodManager.hideSoftInputFromWindow(edt_buscar_pedido.getWindowToken(), 0);
+                            System.out.println("Valida Pedido");
                         }
-
-
                     } catch (Exception Exe) {
                         Exe.printStackTrace();
-
                     }
-
-
                 }
-
                 return false;
             }
         });
-
-
-
     }
 
     @Override
@@ -284,7 +277,6 @@ public class Buscar_pedidos extends AppCompatActivity {
     }
 
     public void ObtenerItemsPedido(String corr){
-
 
         System.out.println("Obtener Items Pedido      mensaje 1");
         items_pedidos = ObtenerItems(corr);
@@ -505,8 +497,10 @@ public class Buscar_pedidos extends AppCompatActivity {
         boolean validador = false;
         ContentResolver r = getContentResolver();
         ArrayList<ContentProviderOperation> ops = new ArrayList<>();
+        System.out.println("No pedidod " +pedido);
         String columnas =ContratoPedidos.Pedidos.NO_PED_MOVIL  + "=?";
         String[]where= {pedido};
+
         Cursor c = r.query(ContratoPedidos.Pedidos.URI_CONTENIDO,null,columnas,where,null);
 
         if(c.getCount()==0){
