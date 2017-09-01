@@ -1539,6 +1539,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         try {
             json = response.getJSONArray(Constantes.CUSTAB);
             System.out.println("JSON Custab... " + json);
+            //json.toString().getBytes("8859-1").length;
+            String Str2 = new String( json.toString().getBytes( "UTF-8" ));
+            System.out.println("VARIABLE STR2 " + Str2);
+
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package com.mosi.tdpsync.ui;
 
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -21,8 +22,8 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final long SPLASH_SCREEN_DELAY = 3000;
-
+    private static final long SPLASH_SCREEN_DELAY = 3500;
+    private static Instrumentation instrumentation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
         Timer timer = new Timer();
         timer.schedule(task,SPLASH_SCREEN_DELAY);
-
     }
 
 
@@ -66,5 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
         return bytesAvailable / (1024.f * 1024.f);
     }
+
 
 }
