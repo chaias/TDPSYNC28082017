@@ -120,9 +120,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             realizarSincronizacionLocalCiatab(syncResult);
             realizarSincronizacionLocalInvptdtab(syncResult);
             realizarSincronizacionLocalCustab(syncResult);
+            realizarSincronizacionLocalTiptab(syncResult);
            // realizarSincronizacionLocalTalonarios(syncResult);
            // realizarSincronizacionLocalPedidos(syncResult);
-            realizarSincronizacionLocalTiptab(syncResult);
+
         } else {
             realizarSincronizacionRemota();
             /*realizarSincronizacionRemotaInvptmtab();
@@ -1605,20 +1606,20 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
                 Uri existingUri = ContratoPedidos.CONTENT_URI_CUS.buildUpon().appendPath(id).build();
 
-                boolean b0 = match.cuscia !=null && !match.cuscia.equals(cuscia);
-                boolean b1 = match.cuscod != null && !match.cuscod.equals(cuscod);
-                boolean b2 = match.cusname != null && !match.cusname.equals(cusname);
-                boolean b3 = match.cusdir != null && !match.cusdir.equals(cusdir);
-                boolean b4 = match.custel != null && !match.custel.equals(custel);
-                boolean b5 = match.cusnit != null && !match.cusnit.equals(cusnit);
-                boolean b6 = match.cuslimcre != null && !match.cuslimcre.equals(cuslimcre);
-                boolean b7 = match.cusdiaven != null && !match.cusdiaven.equals(cusdiaven);
-                boolean b8 = match.cusmail != null && !match.cusmail.equals(cusmail);
-                boolean b9 = match.cuslatitud != null && !match.cuslatitud.equals(cuslatitud);
-                boolean b10 = match.cuslongitud != null && !match.cuslongitud.equals(cuslongitud);
-                boolean b11 = match.cuscat != null && !match.cuscat.equals(cuscat);
-                boolean b12 = match.cusruta != null && !match.cusruta.equals(cusruta);
-                boolean b13 = match.cusiva != null && !match.cusiva.equals(cusiva);
+                boolean b0 = match.cuscia       !=  null && !match.cuscia.equals(cuscia);
+                boolean b1 = match.cuscod       !=  null && !match.cuscod.equals(cuscod);
+                boolean b2 = match.cusname      !=  null && !match.cusname.equals(cusname);
+                boolean b3 = match.cusdir       !=  null && !match.cusdir.equals(cusdir);
+                boolean b4 = match.custel       !=  null && !match.custel.equals(custel);
+                boolean b5 = match.cusnit       !=  null && !match.cusnit.equals(cusnit);
+                boolean b6 = match.cuslimcre    !=  null && !match.cuslimcre.equals(cuslimcre);
+                boolean b7 = match.cusdiaven    !=  null && !match.cusdiaven.equals(cusdiaven);
+                boolean b8 = match.cusmail      !=  null && !match.cusmail.equals(cusmail);
+                boolean b9 = match.cuslatitud   !=  null && !match.cuslatitud.equals(cuslatitud);
+                boolean b10 = match.cuslongitud !=  null && !match.cuslongitud.equals(cuslongitud);
+                boolean b11 = match.cuscat      !=  null && !match.cuscat.equals(cuscat);
+                boolean b12 = match.cusruta     !=  null && !match.cusruta.equals(cusruta);
+                boolean b13 = match.cusiva      !=  null && !match.cusiva.equals(cusiva);
 
 
                 if (b0 || b1 || b2 || b3 || b4 || b5 || b6 || b7 || b8 || b9 || b10 || b11 || b12 || b13){
@@ -3274,6 +3275,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }else {
             Log.i(TAG, "No se requiere sincronización de Pedidos");
         }
+
+    }
+
+    public void validaEspacio(){
 
     }
 }
