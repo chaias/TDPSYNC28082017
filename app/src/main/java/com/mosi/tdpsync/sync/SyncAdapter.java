@@ -56,7 +56,7 @@ import java.util.Map;
 public class SyncAdapter extends AbstractThreadedSyncAdapter {
     private static final String TAG = SyncAdapter.class.getSimpleName();
 
-    ContentResolver resolver;
+    private ContentResolver resolver;
     private Gson gson = new Gson();
     private Gson gson2 = new Gson();
 
@@ -73,12 +73,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     };
 
     // Indices para las columnas indicadas en la proyección
-    public static final int COLUMNA_ID = 0;
-    public static final int COLUMNA_ID_REMOTA = 1;
-    public static final int COLUMNA_MONTO = 2;
-    public static final int COLUMNA_ETIQUETA = 3;
-    public static final int COLUMNA_FECHA = 4;
-    public static final int COLUMNA_DESCRIPCION = 5;
+    private static final int COLUMNA_ID = 0;
+    private static final int COLUMNA_ID_REMOTA = 1;
+    private static final int COLUMNA_MONTO = 2;
+    private static final int COLUMNA_ETIQUETA = 3;
+    private static final int COLUMNA_FECHA = 4;
+    private static final int COLUMNA_DESCRIPCION = 5;
 
     public SyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -350,7 +350,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         List<Gasto> data = Arrays.asList(res);
         System.out.println("data "+ data);
         // Lista para recolección de operaciones pendientes
-        ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+        ArrayList<ContentProviderOperation> ops = new ArrayList<>();
 
         // Tabla hash para recibir las entradas entrantes
         HashMap<String, Gasto> expenseMap = new HashMap<String, Gasto>();
@@ -516,10 +516,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             ContratoPedidos.UsuarioColumnas.PASSWORD
     };
 
-    public static final int COLUMNA_USR_ID = 0;
-    public static final int COLUMNA_USR_ID_REMOTA = 1;
-    public static final int COLUMNA_USR_USUARIO = 2;
-    public static final int COLUMNA_USR_PASSWORD = 3;
+    private static final int COLUMNA_USR_ID = 0;
+    private static final int COLUMNA_USR_ID_REMOTA = 1;
+    private static final int COLUMNA_USR_USUARIO = 2;
+    private static final int COLUMNA_USR_PASSWORD = 3;
 
     private void realizarSincronizacionLocalUsuarios(final SyncResult syncResult){
         Log.i(TAG,"Actualizando Cliente Usuarios");
@@ -789,10 +789,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             ContratoPedidos.CiatabColumnas.CIANOMBRE
     };
 
-    public static final int COLUMNA_CIA_ID = 0;
-    public static final int COLUMNA_CIA_ID_REMOTA = 1;
-    public static final int COLUMNA_CIA_CIACOD = 2;
-    public static final int COLUMNA_CIA_CIANOMBRE = 3;
+    private static final int COLUMNA_CIA_ID = 0;
+    private static final int COLUMNA_CIA_ID_REMOTA = 1;
+    private static final int COLUMNA_CIA_CIACOD = 2;
+    private static final int COLUMNA_CIA_CIANOMBRE = 3;
 
     private void realizarSincronizacionLocalCiatab(final SyncResult syncResult){
         Log.i(TAG,"Actualizando Cliente Ciatab");
@@ -1063,11 +1063,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     };
 
-    public static final int COLUMNA_INVPTD_ID = 0;
-    public static final int COLUMNA_INVPTD_ID_REMOTA = 1;
-    public static final int COLUMNA_INVPTD_INVPTDCIA = 2;
-    public static final int COLUMNA_INVPTD_INVPTDCOD = 3;
-    public static final int COLUMNA_INVPTD_INVPTDDISPI = 4;
+    private static final int COLUMNA_INVPTD_ID = 0;
+    private static final int COLUMNA_INVPTD_ID_REMOTA = 1;
+    private static final int COLUMNA_INVPTD_INVPTDCIA = 2;
+    private static final int COLUMNA_INVPTD_INVPTDCOD = 3;
+    private static final int COLUMNA_INVPTD_INVPTDDISPI = 4;
 
     private void realizarSincronizacionLocalInvptdtab(final SyncResult syncResult){
         Log.i(TAG,"Actualizando Cliente Invptdtab");
@@ -1354,22 +1354,22 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             ContratoPedidos.CustabColumnas.CUSIVA,
     };
 
-    public static final int COLUMNA_CUS_ID = 0;
-    public static final int COLUMNA_CUS_ID_REMOTA = 1;
-    public static final int COLUMNA_CUS_CUSCIA = 2;
-    public static final int COLUMNA_CUS_CUSCOD = 3;
-    public static final int COLUMNA_CUS_CUSNAME = 4;
-    public static final int COLUMNA_CUS_CUSDIR = 5;
-    public static final int COLUMNA_CUS_CUSTEL = 6;
-    public static final int COLUMNA_CUS_CUSNIT = 7;
-    public static final int COLUMNA_CUS_CUSLIMCRE = 8;
-    public static final int COLUMNA_CUS_CUSDIAVEN = 9;
-    public static final int COLUMNA_CUS_CUSMAIL = 10;
-    public static final int COLUMNA_CUS_CUSLATITUD = 11;
-    public static final int COLUMNA_CUS_CUSLONGITUD = 12;
-    public static final int COLUMNA_CUS_CUSCAT = 13;
-    public static final int COLUMNA_CUS_CUSRUTA = 14;
-    public static final int COLUMNA_CUS_CUSIVA = 15;
+    private static final int COLUMNA_CUS_ID = 0;
+    private static final int COLUMNA_CUS_ID_REMOTA = 1;
+    private static final int COLUMNA_CUS_CUSCIA = 2;
+    private static final int COLUMNA_CUS_CUSCOD = 3;
+    private static final int COLUMNA_CUS_CUSNAME = 4;
+    private static final int COLUMNA_CUS_CUSDIR = 5;
+    private static final int COLUMNA_CUS_CUSTEL = 6;
+    private static final int COLUMNA_CUS_CUSNIT = 7;
+    private static final int COLUMNA_CUS_CUSLIMCRE = 8;
+    private static final int COLUMNA_CUS_CUSDIAVEN = 9;
+    private static final int COLUMNA_CUS_CUSMAIL = 10;
+    private static final int COLUMNA_CUS_CUSLATITUD = 11;
+    private static final int COLUMNA_CUS_CUSLONGITUD = 12;
+    private static final int COLUMNA_CUS_CUSCAT = 13;
+    private static final int COLUMNA_CUS_CUSRUTA = 14;
+    private static final int COLUMNA_CUS_CUSIVA = 15;
 
     private void realizarSincronizacionLocalCustab(final SyncResult syncResult){
         Log.i(TAG,"Actualizando Cliente Custab");
@@ -1708,12 +1708,12 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     };
 
-    public static final int COLUMNA_TAL_ID = 0;
-    public static final int COLUMNA_TAL_ID_REMOTA = 1;
-    public static final int COLUMNA_TAL_TALCOD = 2;
-    public static final int COLUMNA_TAL_TALCIA = 3;
-    public static final int COLUMNA_TAL_TALDES = 4;
-    public static final int COLUMNA_TAL_TALCOR = 5;
+    private static final int COLUMNA_TAL_ID = 0;
+    private static final int COLUMNA_TAL_ID_REMOTA = 1;
+    private static final int COLUMNA_TAL_TALCOD = 2;
+    private static final int COLUMNA_TAL_TALCIA = 3;
+    private static final int COLUMNA_TAL_TALDES = 4;
+    private static final int COLUMNA_TAL_TALCOR = 5;
 
     private void realizarSincronizacionLocalTalonarios(final SyncResult syncResult){
         Log.i(TAG,"Actualizando Cliente Talonarios");
@@ -1993,14 +1993,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     };
 
-    public static final int COLUMNA_INVPTM_ID = 0;
-    public static final int COLUMNA_INVPTM_ID_REMOTA = 1;
-    public static final int COLUMNA_INVPTM_INVPTMCIA = 2;
-    public static final int COLUMNA_INVPTM_INVPTMCOD = 3;
-    public static final int COLUMNA_INVPTM_INVPTMDESC = 4;
-    public static final int COLUMNA_INVPTM_INVPTMMED = 5;
-    public static final int COLUMNA_INVPTM_INVPTMEMP = 6;
-    public static final int COLUMNA_INVPTM_INVPTMIVA = 7;
+    private static final int COLUMNA_INVPTM_ID = 0;
+    private static final int COLUMNA_INVPTM_ID_REMOTA = 1;
+    private static final int COLUMNA_INVPTM_INVPTMCIA = 2;
+    private static final int COLUMNA_INVPTM_INVPTMCOD = 3;
+    private static final int COLUMNA_INVPTM_INVPTMDESC = 4;
+    private static final int COLUMNA_INVPTM_INVPTMMED = 5;
+    private static final int COLUMNA_INVPTM_INVPTMEMP = 6;
+    private static final int COLUMNA_INVPTM_INVPTMIVA = 7;
 
     private void realizarSincronizacionLocalInvptmtab(final SyncResult syncResult){
         Log.i(TAG,"Actualizando Cliente Invptmtab");
@@ -2293,13 +2293,13 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             ContratoPedidos.Pr1tabColumnas.PR1PREC,
     };
 
-    public static final int COLUMNA_PR1_ID = 0;
-    public static final int COLUMNA_PR1_ID_REMOTA = 1;
-    public static final int COLUMNA_PR1_PR1CIA = 2;
-    public static final int COLUMNA_PR1_PR1COD = 3;
-    public static final int COLUMNA_PR1_PR1CAT = 4;
-    public static final int COLUMNA_PR1_PR1FEC = 5;
-    public static final int COLUMNA_PR1_PR1DIQ = 6;
+    private static final int COLUMNA_PR1_ID = 0;
+    private static final int COLUMNA_PR1_ID_REMOTA = 1;
+    private static final int COLUMNA_PR1_PR1CIA = 2;
+    private static final int COLUMNA_PR1_PR1COD = 3;
+    private static final int COLUMNA_PR1_PR1CAT = 4;
+    private static final int COLUMNA_PR1_PR1FEC = 5;
+    private static final int COLUMNA_PR1_PR1DIQ = 6;
 
     private void realizarSincronizacionLocalPr1tab(final SyncResult syncResult){
         Log.i(TAG,"Actualizando Cliente Pr1tab");
@@ -2587,11 +2587,11 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             ContratoPedidos.TiptabColumnas.DOCNAME,
     };
 
-    public static final int COLUMNA_TIP_ID = 0;
-    public static final int COLUMNA_TIP_ID_REMOTA = 1;
-    public static final int COLUMNA_TIP_TIPCIA = 2;
-    public static final int COLUMNA_TIP_TIPCOD = 3;
-    public static final int COLUMNA_TIP_TIPDES = 4;
+    private static final int COLUMNA_TIP_ID = 0;
+    private static final int COLUMNA_TIP_ID_REMOTA = 1;
+    private static final int COLUMNA_TIP_TIPCIA = 2;
+    private static final int COLUMNA_TIP_TIPCOD = 3;
+    private static final int COLUMNA_TIP_TIPDES = 4;
 
     private void realizarSincronizacionLocalTiptab(final SyncResult syncResult){
         Log.i(TAG,"Actualizando Cliente Tiptab");
@@ -2885,30 +2885,30 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             ContratoPedidos.PedidosColumnas.FECHA_SISTEMA
     };
 
-    public static final int COLUMNA_PED_ID = 0;
-    public static final int COLUMNA_PED_ID_REMOTA = 1;
-    public static final int COLUMNA_PED_COMPANIA = 2;
-    public static final int COLUMNA_PED_CLIENTE = 3;
-    public static final int COLUMNA_PED_RUTA = 4;
-    public static final int COLUMNA_PED_LUGAR_ENTREGA = 5;
-    public static final int COLUMNA_PED_PRODUCTO = 6;
-    public static final int COLUMNA_PED_PRECIO_PT = 7;
-    public static final int COLUMNA_PED_TIPO_PEDIDO = 8;
-    public static final int COLUMNA_PED_NO_PED_MOVIL = 9;
-    public static final int COLUMNA_PED_FECHA = 10;
-    public static final int COLUMNA_PED_UNIDADES_VTA = 11;
-    public static final int COLUMNA_PED_UNIDADES_BONI = 12;
-    public static final int COLUMNA_PED_LATITUD = 13;
-    public static final int COLUMNA_PED_LONGITUD = 14;
-    public static final int COLUMNA_PED_ESTATUS = 15;
-    public static final int COLUMNA_PED_ESTATUS_REG = 16;
-    public static final int COLUMNA_PED_QTY_ORIGINAL = 17;
-    public static final int COLUMNA_PED_ID_PEDIDO = 18;
-    public static final int COLUMNA_PED_REG_ANULADO = 19;
-    public static final int COLUMNA_PED_ESTATUS_FINAL = 20;
-    public static final int COLUMNA_PED_NO_PEDIDO_CMF = 21;
-    public static final int COLUMNA_PED_USUARIO = 22;
-    public static final int COLUMNA_PED_FECHA_SISTEMA = 23;
+    private static final int COLUMNA_PED_ID = 0;
+    private static final int COLUMNA_PED_ID_REMOTA = 1;
+    private static final int COLUMNA_PED_COMPANIA = 2;
+    private static final int COLUMNA_PED_CLIENTE = 3;
+    private static final int COLUMNA_PED_RUTA = 4;
+    private static final int COLUMNA_PED_LUGAR_ENTREGA = 5;
+    private static final int COLUMNA_PED_PRODUCTO = 6;
+    private static final int COLUMNA_PED_PRECIO_PT = 7;
+    private static final int COLUMNA_PED_TIPO_PEDIDO = 8;
+    private static final int COLUMNA_PED_NO_PED_MOVIL = 9;
+    private static final int COLUMNA_PED_FECHA = 10;
+    private static final int COLUMNA_PED_UNIDADES_VTA = 11;
+    private static final int COLUMNA_PED_UNIDADES_BONI = 12;
+    private static final int COLUMNA_PED_LATITUD = 13;
+    private static final int COLUMNA_PED_LONGITUD = 14;
+    private static final int COLUMNA_PED_ESTATUS = 15;
+    private static final int COLUMNA_PED_ESTATUS_REG = 16;
+    private static final int COLUMNA_PED_QTY_ORIGINAL = 17;
+    private static final int COLUMNA_PED_ID_PEDIDO = 18;
+    private static final int COLUMNA_PED_REG_ANULADO = 19;
+    private static final int COLUMNA_PED_ESTATUS_FINAL = 20;
+    private static final int COLUMNA_PED_NO_PEDIDO_CMF = 21;
+    private static final int COLUMNA_PED_USUARIO = 22;
+    private static final int COLUMNA_PED_FECHA_SISTEMA = 23;
 
     private void realizarSincronizacionLocalPedidos(final SyncResult syncResult){
         Log.i(TAG,"Actualizando Cliente Pedidos");
