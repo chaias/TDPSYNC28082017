@@ -85,6 +85,9 @@ public class Buscar_pedidos extends AppCompatActivity {
         ultimoCorr = String.valueOf(xs - 1);
         txt_correlativo.setText("Ultimo Correlativo: " + ultimoCorr);
 
+
+
+
         edt_buscar_pedido.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {

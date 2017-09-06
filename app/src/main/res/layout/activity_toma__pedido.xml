@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="44dp"
+        android:layout_margin="46dp"
         android:src="@mipmap/addshoping"
         app:backgroundTint="@color/btn_floating"
         />

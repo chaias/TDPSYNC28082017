@@ -15,6 +15,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edt_correlativo_buscar"
+        android:drawableEnd="@android:drawable/btn_star_big_on"
         android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_edge"
         android:hint="@string/hint_buscar"
@@ -81,6 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/correlativo_final"
+        android:textColor="@color/input_login"
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
         android:layout_below="@+id/edt_correlativo_buscar"
@@ -92,6 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cliente"
+        android:textColor="@color/input_login"
         android:layout_below="@+id/txt_no_correlativo"
         android:layout_alignLeft="@+id/txt_no_correlativo"
         android:layout_alignStart="@+id/txt_no_correlativo" />
