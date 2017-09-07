@@ -60,7 +60,9 @@
             android:exported="true"
             android:icon="@mipmap/ic_purchase_order"
             android:syncable="true" />
+
         <!-- SERVICIO DE AUTENTICACIÓN -->
+
         <service android:name=".sync.AuthenticationService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
