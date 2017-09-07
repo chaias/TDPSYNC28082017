@@ -511,9 +511,6 @@ public class Buscar_pedidos extends AppCompatActivity {
         }else{
             validador = true;
         }
-
-
-
             return validador;
     }
 
