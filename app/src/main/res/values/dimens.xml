@@ -7,6 +7,8 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="descripcion">16dp</dimen>
 
+    <dimen name="tamano_texto">16dp</dimen>
+
 
     <dimen name="margin_right">20dp</dimen>
     <dimen name="filter_image">50dp</dimen>
