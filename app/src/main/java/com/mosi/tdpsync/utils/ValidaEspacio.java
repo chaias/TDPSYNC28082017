@@ -42,18 +42,33 @@ public class ValidaEspacio {
             @Override
             public void run() {
 
-                String data=httpGetData(usuarios);
+                 usuarios= httpGetData(usuarios);
+                 companias=httpGetData(companias);
+                 clientes=httpGetData(clientes);
+                 tipos=httpGetData(tipos);
+                 invptdtab=httpGetData(invptdtab);
+                 invptmtab=httpGetData(invptmtab);
+                 pr1tab=httpGetData(pr1tab);
+                 talonarios=httpGetData(talonarios);
+                 pedidos=httpGetData(pedidos);
+
                 try {
-                    System.out.println(usuarios);
-                    System.out.println(data  + " data");
-                    JSONArray ja = new JSONArray(data);
-                    for (int i = 0; i < ja.length(); i++) {
-                        jsonObject = ja.getJSONObject(i);
 
-                    }
-                      //jsonObject.toString().getBytes(UTF-8).length;
+                    final byte[] utf8usuarios = usuarios.getBytes("UTF-8");
+                    final byte[] utf8companias = companias.getBytes("UTF-8");
+                    final byte[] utf8clientes = clientes.getBytes("UTF-8");
+                    final byte[] utf8tipos = tipos.getBytes("UTF-8");
+                    final byte[] utf8invptdtab = invptdtab.getBytes("UTF-8");
+                    final byte[] utf8invptmtab = invptmtab.getBytes("UTF-8");
+                    final byte[] utf8pr1tab = pr1tab.getBytes("UTF-8");
+                    final byte[] utf8talonarios = talonarios.getBytes("UTF-8");
+                    final byte[] utf8pedidos = pedidos.getBytes("UTF-8");
 
-                } catch (JSONException e) {
+
+                    System.out.println( "espacio "+utf8usuarios.length +" "+utf8companias.length+" "+ utf8clientes.length+" "+utf8tipos.length+" "+utf8invptdtab.length+" "+utf8invptmtab.length
+                            +" "+utf8pr1tab.length+" "+utf8talonarios.length);
+
+                } catch (Exception e) {
                     System.out.println("Error " + e.toString());
 
                     e.printStackTrace();

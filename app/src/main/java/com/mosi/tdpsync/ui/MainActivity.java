@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.mosi.tdpsync.R;
+import com.mosi.tdpsync.utils.ValidaEspacio;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final long SPLASH_SCREEN_DELAY = 3500;
     private static Instrumentation instrumentation;
+    ValidaEspacio v = new ValidaEspacio();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
        float i = getMegabytesAvailable();
+        v.verificador();
         System.out.println("mensaje de espacio "+i);
 
         TimerTask task = new TimerTask() {

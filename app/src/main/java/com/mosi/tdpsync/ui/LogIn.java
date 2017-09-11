@@ -38,6 +38,7 @@ import android.widget.Toast;
 import com.mosi.tdpsync.R;
 import com.mosi.tdpsync.sqlite.ContratoPedidos;
 import com.mosi.tdpsync.sync.SyncAdapter;
+import com.mosi.tdpsync.utils.ValidaEspacio;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,6 +62,7 @@ public class LogIn extends AppCompatActivity implements LoaderManager.LoaderCall
         setContentView(R.layout.activity_log_in);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getSupportActionBar().hide();
+        ValidaEspacio v = new ValidaEspacio();
 
         TF = Typeface.createFromAsset(getAssets(),font_path);
         Log.i("Log In","Iniciando aplicacion....");
@@ -82,6 +84,7 @@ public class LogIn extends AppCompatActivity implements LoaderManager.LoaderCall
         adaptador = new AdaptadorDePedidos(this);
 
         Log.i("Log In","Iniciando aplicacion.... 4 ");
+        v.verificador();
 
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.animation_button);
         img_bnt_sync.setAnimation(animation);
