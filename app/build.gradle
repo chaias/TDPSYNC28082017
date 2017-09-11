@@ -45,4 +45,5 @@ dependencies {
     compile 'com.android.support:design:24.+'
     compile 'com.mcxiaoke.volley:library:1.0.16'
     compile 'com.google.code.gson:gson:2.3.1'
+    compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 }

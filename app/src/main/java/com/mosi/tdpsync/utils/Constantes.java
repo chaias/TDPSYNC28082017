@@ -9,7 +9,7 @@ public class Constantes {
      * Puerto que utilizas para la conexión.
      * Dejalo en blanco si no has configurado esta característica.
      */
-
+public String dd;
 
     /**
      * Dirección IP de genymotion o AVD
@@ -20,8 +20,8 @@ public class Constantes {
     /**
      * URLs del Web Service
      */
-    public static final String GET_URL = IP  + "/isaias/Toma_De_Pedido/web/obtener_gastos.php";
-    public static final String INSERT_URL = IP  + "/isaias/Toma_De_Pedido/web/insertar_gasto.php";
+    public static  String GET_URL = IP  + "/isaias/Toma_De_Pedido/web/obtener_gastos.php";
+    public static  String INSERT_URL = IP  + "/isaias/Toma_De_Pedido/web/insertar_gasto.php";
 
     /**
      * Campos de las respuestas Json
@@ -41,7 +41,7 @@ public class Constantes {
 
     /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE USUARIOS\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public static final String GET_URL_USR = IP  + "/isaias/Toma_De_Pedido/web/obtener_usuarios.php";
+    public static String GET_URL_USR = IP  + "/isaias/Toma_De_Pedido/web/obtener_usuarios.php";
     public static final String INSERT_URL_USR = IP  + "/isaias/Toma_De_Pedido/web/insertar_usuarios.php";
 
     /**
@@ -53,7 +53,7 @@ public class Constantes {
 
     /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE CIATAB\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public static final String GET_URL_CIA = IP  + "/isaias/Toma_De_Pedido/web/obtener_ciatab.php";
+    public static String GET_URL_CIA = IP  + "/isaias/Toma_De_Pedido/web/obtener_ciatab.php";
     public static final String INSERT_URL_CIA = IP  + "/isaias/Toma_De_Pedido/web/insertar_ciatab.php";
 
     /**
@@ -64,7 +64,7 @@ public class Constantes {
 
     /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE INVPTDTAB\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public static final String GET_URL_INVPTD = IP  + "/isaias/Toma_De_Pedido/web/obtener_invptdtab.php";
+    public static String GET_URL_INVPTD = IP  + "/isaias/Toma_De_Pedido/web/obtener_invptdtab.php";
     public static final String INSERT_URL_INVPTD = IP  + "/isaias/Toma_De_Pedido/web/insertar_invptdtab.php";
 
     /**
@@ -75,7 +75,7 @@ public class Constantes {
 
     /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE CUSTAB\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public static final String GET_URL_CUS = IP  + "/isaias/Toma_De_Pedido/web/obtener_custab.php";
+    public static String GET_URL_CUS = IP  + "/isaias/Toma_De_Pedido/web/obtener_custab.php";
     public static final String INSERT_URL_CUS = IP  + "/isaias/Toma_De_Pedido/web/insertar_custab.php";
 
     /**
@@ -86,7 +86,7 @@ public class Constantes {
 
     /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE TALONARIOS\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public static final String GET_URL_TAL = IP  + "/isaias/Toma_De_Pedido/web/obtener_talonarios.php";
+    public static String GET_URL_TAL = IP  + "/isaias/Toma_De_Pedido/web/obtener_talonarios.php";
     public static final String INSERT_URL_TAL = IP  + "/isaias/Toma_De_Pedido/web/insertar_talonarios.php";
 
     /**
@@ -97,7 +97,7 @@ public class Constantes {
 
     /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE INVPTMTAB\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public static final String GET_URL_INVPTM = IP  + "/isaias/Toma_De_Pedido/web/obtener_invptmtab.php";
+    public static String GET_URL_INVPTM = IP  + "/isaias/Toma_De_Pedido/web/obtener_invptmtab.php";
     public static final String INSERT_URL_INVPTM = IP  + "/isaias/Toma_De_Pedido/web/insertar_invptmtab.php";
 
     /**
@@ -108,7 +108,7 @@ public class Constantes {
 
     /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE TIPTAB\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public static final String GET_URL_TIP = IP  + "/isaias/Toma_De_Pedido/web/obtener_tiptab.php";
+    public static String GET_URL_TIP = IP  + "/isaias/Toma_De_Pedido/web/obtener_tiptab.php";
     public static final String INSERT_URL_TIP = IP  + "/isaias/Toma_De_Pedido/web/insertar_tiptab.php";
 
     /**
@@ -119,7 +119,7 @@ public class Constantes {
 
     /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE PR1TAB\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public static final String GET_URL_PR1 = IP  + "/isaias/Toma_De_Pedido/web/obtener_pr1tab.php";
+    public static String GET_URL_PR1 = IP  + "/isaias/Toma_De_Pedido/web/obtener_pr1tab.php";
     public static final String INSERT_URL_PR1 = IP  + "/isaias/Toma_De_Pedido/web/insertar_pr1tab.php";
 
     /**
@@ -130,7 +130,7 @@ public class Constantes {
 
     /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE PEDIDOS\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    public static final String GET_URL_PED = IP  + "/isaias/Toma_De_Pedido/web/obtener_pedido.php";
+    public static String GET_URL_PED = IP  + "/isaias/Toma_De_Pedido/web/obtener_pedido.php";
     public static final String INSERT_URL_PED = IP  + "/isaias/Toma_De_Pedido/web/insertar_pedido.php";
 
     /**
