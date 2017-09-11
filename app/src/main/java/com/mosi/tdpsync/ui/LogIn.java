@@ -194,7 +194,7 @@ public class LogIn extends AppCompatActivity implements LoaderManager.LoaderCall
                 
                 SyncAdapter.sincronizarAhora(LogIn.this,false);
                 SyncAdapter.sincronizarAhora(LogIn.this, true);
-                Thread.sleep(35000);
+                Thread.sleep(30000);
             }catch(Exception e){
                 e.printStackTrace();
             }
