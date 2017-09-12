@@ -84,7 +84,7 @@ public class LogIn extends AppCompatActivity implements LoaderManager.LoaderCall
         adaptador = new AdaptadorDePedidos(this);
 
         Log.i("Log In","Iniciando aplicacion.... 4 ");
-        v.verificador();
+        //v.verificador();
 
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.animation_button);
         img_bnt_sync.setAnimation(animation);

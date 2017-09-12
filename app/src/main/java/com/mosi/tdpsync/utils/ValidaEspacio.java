@@ -83,7 +83,7 @@ public class ValidaEspacio {
 
             }}).start();//
 
-            int Adescargar = utf8usuarios.length+utf8companias.length+utf8clientes.length+utf8tipos.length+
+            float Adescargar = utf8usuarios.length+utf8companias.length+utf8clientes.length+utf8tipos.length+
                     utf8invptdtab.length+utf8invptmtab.length+utf8pr1tab.length+utf8talonarios.length;
 
         return  Adescargar;

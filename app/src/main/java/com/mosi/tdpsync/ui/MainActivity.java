@@ -38,7 +38,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-
+        disponible = v.getMegabytesAvailable();
+        Adescargar = v.verificador();
+        if (disponible>Adescargar){
+            Toast existe = Toast.makeText(getApplicationContext(), "No cuentas con espacio para una sincronizacion", Toast.LENGTH_LONG);
+            existe.show();
+        }
 
 
 
