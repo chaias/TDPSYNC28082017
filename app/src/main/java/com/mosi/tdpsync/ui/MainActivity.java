@@ -39,13 +39,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         disponible = v.getMegabytesAvailable();
-        Adescargar = v.verificador();
-        if (disponible>Adescargar){
-            Toast existe = Toast.makeText(getApplicationContext(), "No cuentas con espacio para una sincronizacion", Toast.LENGTH_LONG);
-            existe.show();
-        }
-
-
+        v.verificador(MainActivity.this);
 
         TimerTask task = new TimerTask() {
             @Override
