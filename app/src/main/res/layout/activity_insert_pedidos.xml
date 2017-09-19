@@ -42,7 +42,7 @@
             android:completionThreshold="1"
             android:background="@drawable/rounded_edge"
             android:hint="@string/hint_cantidad"
-            android:imeOptions="actionNext"
+            android:imeOptions="actionDone"
             android:nextFocusDown="@+id/edt_correlativo_buscar"
             android:inputType="number"
             android:padding="10dp"
@@ -51,6 +51,7 @@
 
         <EditText
             android:layout_width="fill_parent"
+            android:visibility="invisible"
             android:layout_height="wrap_content"
             android:id="@+id/edt_bonificaciones"
             android:layout_marginBottom="10dp"

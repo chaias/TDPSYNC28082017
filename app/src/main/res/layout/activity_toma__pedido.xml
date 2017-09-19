@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="46dp"
-        android:src="@mipmap/addshoping"
+        android:src="@mipmap/addshoppingwhite"
         app:backgroundTint="@color/btn_floating"
         />
 

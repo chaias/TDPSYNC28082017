@@ -10,8 +10,8 @@
         <menu>
             <item
                 android:id="@+id/cancel"
-                android:icon="@mipmap/cancel_file"
-                android:title="cancelar Pedido"/>
+                android:icon="@mipmap/cancel"
+                android:title="Cancelar Pedido"/>
 
             <item
                 android:id="@+id/finalizar_pedido"

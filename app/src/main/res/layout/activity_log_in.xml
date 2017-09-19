@@ -75,7 +75,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:background="@drawable/boton_redondo"
-        android:src="@mipmap/synchronize"
+        android:src="@mipmap/sincronizar"
         android:contentDescription="@string/action_sync" />
 
     <TextView
