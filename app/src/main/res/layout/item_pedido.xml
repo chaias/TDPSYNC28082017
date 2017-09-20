@@ -34,6 +34,7 @@
         android:textColor="@color/input_login"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Bonificacion: 00000"
+        android:visibility="invisible"
         android:id="@+id/twv_bonificacion"
         android:layout_alignBaseline="@+id/twv_cantidad"
         android:layout_alignBottom="@+id/twv_cantidad"
