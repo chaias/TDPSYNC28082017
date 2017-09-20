@@ -84,7 +84,7 @@ public class insert_pedidos extends AppCompatActivity {
 
         producto.setAdapter(adapter);
 
-        bonificaciones.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        cantidad.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
