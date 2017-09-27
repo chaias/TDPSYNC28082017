@@ -458,4 +458,30 @@ public class Utilidades {
         return jObject;
     }
 //Melanie Molina
+
+    /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE IMAGENES\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    public static final int COLUMNA_CODIGO = 2;
+    public static final int COLUMNA_IMAGEN = 3;
+    public static final int COLUMNA_NOMBRE = 4;
+
+    public static JSONObject deCursorAJSONObjectImagen(Cursor c){
+        JSONObject jObjects = new JSONObject();
+        String codigo;
+        String imagen;
+        String nombre;
+
+        imagen = c.getString(COLUMNA_IMAGEN);
+        nombre = c.getString(COLUMNA_NOMBRE);
+
+        try {
+            jObjects.put(ContratoPedidos.ImagenesColumnas.IMAGEN,imagen);
+            jObjects.put(ContratoPedidos.ImagenesColumnas.NOMBRE,nombre);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        Log.i("Cursor a IMAGENES", String.valueOf(jObjects));
+        return  jObjects;
+    }
+
 }

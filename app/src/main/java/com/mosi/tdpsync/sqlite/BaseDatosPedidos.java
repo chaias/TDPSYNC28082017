@@ -17,7 +17,7 @@ public class BaseDatosPedidos extends SQLiteOpenHelper {
 
     private static final String NOMBRE_BASE_DATOS = "pedidos.db";
 
-    private static final int VERSION_ACTUAL = 48;
+    private static final int VERSION_ACTUAL = 49;
 
     protected final Context contexto;
 
@@ -38,6 +38,7 @@ public class BaseDatosPedidos extends SQLiteOpenHelper {
         String PEDIDO_MOVIL = "pedido_movil";//ya esta creado el codigo para sincronizar
         String TALONARIOS = "talonario";//ya esta creado el codigo para sincronizar
         String USUARIOS = "usuarios";// ya esta creado el codigo para sincronizar
+        String IMAGENES = "imagenes";// ya esta creado el codigo para sincronizar /// no creado Isaias 22/09/2017  11:19 am
         String gasto = "gasto";// ya esta creado el codigo para sincronizar
 
 
@@ -268,6 +269,17 @@ public class BaseDatosPedidos extends SQLiteOpenHelper {
 
         db.execSQL(cmd_talonarios);
 
+        String cmd_imagenes = "CREATE TABLE " + Tablas.IMAGENES + " (" +
+                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                ContratoPedidos.ColumnasImagenes.CODIGO + " TEXT , " +
+                ContratoPedidos.ColumnasImagenes.IMAGEN + " BLOB , " +
+                ContratoPedidos.ColumnasImagenes.NOMBRE + " TEXT , " +
+                ContratoPedidos.ColumnasImagenes.ID_REMOTA + " TEXT UNIQUE," +
+                ContratoPedidos.ColumnasImagenes.ESTADO + " INTEGER NOT NULL DEFAULT " + ContratoPedidos.ESTADO_OK + "," +
+                ContratoPedidos.ColumnasImagenes.PENDIENTE_INSERCCION + " INTEGER NOT NULL DEFAULT 0)";
+
+        db.execSQL(cmd_imagenes);
+
         String cmd = "CREATE TABLE " + Tablas.gasto + " (" +
                 BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 ContratoPedidos.Columnas.MONTO + " TEXT, " +
@@ -303,6 +315,7 @@ public class BaseDatosPedidos extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.TALONARIOS);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.PEDIDO_MOVIL);
         db.execSQL("DROP TABLE IF EXISTS " + Tablas.gasto);
+        db.execSQL("DROP TABLE IF EXISTS " + Tablas.IMAGENES);
 
 
         onCreate(db);

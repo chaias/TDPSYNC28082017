@@ -140,5 +140,15 @@ public String dd;
     public static final String PEDIDOS = "pedido";
 
 
+    /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE IMAGENES\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    public static String GET_URL_IMG = IP  + "/isaias/Toma_De_Pedido/web/obtener_imagenes.php";
+    public static final String INSERT_URL_IMG = IP  + "/isaias/Toma_De_Pedido/web/insertar_imagenes.php";
+
+    /**
+     * Campos de las respuestas Json
+     */
+    public static final String ID_IMAGENES= "id";
+    public static final String IMAGENES = "imagenes";
 
 }

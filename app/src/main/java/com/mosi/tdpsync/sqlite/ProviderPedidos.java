@@ -93,6 +93,9 @@ public class ProviderPedidos extends ContentProvider {
     public static final int GASTO = 1600;
     public static final int GASTO_ID = 1601;
 
+    public static final int IMAGENES = 1700;
+    public static final int IMAGENES_ID = 1701;
+
 
     public static final String AUTORIDAD = "com.mosi.tdpsync";
 
@@ -291,6 +294,13 @@ public class ProviderPedidos extends ContentProvider {
                 /* afectados = bd.update(Tablas.gasto,values,
                         selection,selectionArgs);*/
                 break;
+            case IMAGENES:
+
+                affected = bd.delete(Tablas.IMAGENES,selection,
+                        selectionArgs);
+                /* afectados = bd.update(Tablas.gasto,values,
+                        selection,selectionArgs);*/
+                break;
             default:
                 throw new IllegalArgumentException("Elemento gasto desconocido: " +
                         uri);
@@ -365,6 +375,10 @@ public class ProviderPedidos extends ContentProvider {
                bd.insertOrThrow(Tablas.PEDIDO_MOVIL,null,values);
                notificarCambio(uri);
                return ContratoPedidos.PedidosColumnas.crearUriPedido(values.getAsString(Tablas.PEDIDO_MOVIL));
+           case IMAGENES:
+               bd.insertOrThrow(Tablas.IMAGENES,null,values);
+               notificarCambio(uri);
+               return ContratoPedidos.ImagenesColumnas.crearUriImagenes(values.getAsString(Tablas.IMAGENES));
            default:
                throw new SQLException("Falla al insertar fila en : " + uri);
        }
@@ -527,6 +541,20 @@ public class ProviderPedidos extends ContentProvider {
                         selectionArgs,
                         null, null, sortOrder);
                 break;
+            case IMAGENES:
+                c = bd.query(Tablas.IMAGENES,projection,
+                        selection,selectionArgs,
+                        null,null,sortOrder);
+                break;
+            case IMAGENES_ID:
+                id = ContratoPedidos.Imagenes.ObtenerIdImagenes(uri);
+                c = bd.query(Tablas.IMAGENES,projection,
+                        ContratoPedidos.ImagenesColumnas._ID+ "=" + "\'" + id + "\'"
+                                + (!TextUtils.isEmpty(selection) ?
+                                " AND (" + selection + ')' : ""),
+                        selectionArgs,
+                        null, null, sortOrder);
+                break;
             default:
                 throw new IllegalArgumentException("URI no soportada: " + uri);
         }
@@ -657,6 +685,18 @@ public class ProviderPedidos extends ContentProvider {
                 break;
             case PEDIDO_MOVIL:
                 afectados = bd.update(Tablas.PEDIDO_MOVIL,values,
+                        selection,selectionArgs);
+                break;
+            case IMAGENES_ID:
+                id = ContratoPedidos.ImagenesColumnas.ObtenerIdImagenes(uri);
+                afectados = bd.update(Tablas.IMAGENES, values,
+                        ContratoPedidos.ImagenesColumnas.ID_REMOTA + "=" + "\"" + id + "\""
+                                + (!TextUtils.isEmpty(selection) ?
+                                " AND (" + selection + ')' : ""),
+                        selectionArgs);
+                break;
+            case IMAGENES:
+                afectados = bd.update(Tablas.IMAGENES,values,
                         selection,selectionArgs);
                 break;
             default:

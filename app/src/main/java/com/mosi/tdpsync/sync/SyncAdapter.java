@@ -29,6 +29,7 @@ import com.mosi.tdpsync.R;
 import com.mosi.tdpsync.web.Ciatab;
 import com.mosi.tdpsync.web.Custab;
 import com.mosi.tdpsync.web.Gasto;
+import com.mosi.tdpsync.web.Imagenes;
 import com.mosi.tdpsync.web.Invptdtab;
 import com.mosi.tdpsync.web.Invptmtab;
 import com.mosi.tdpsync.web.Pedidos;
@@ -121,6 +122,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             realizarSincronizacionLocalInvptdtab(syncResult);
             realizarSincronizacionLocalCustab(syncResult);
             realizarSincronizacionLocalTiptab(syncResult);
+            realizarSincronizacionLocalImagen(syncResult);
            // realizarSincronizacionLocalTalonarios(syncResult);
            // realizarSincronizacionLocalPedidos(syncResult);
 
@@ -3278,7 +3280,282 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     }
 
-    public void validaEspacio(){
+    /////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE IMANGENES\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    private static final String[] PROJECTION_IMAGENES = new String[]{
+            ContratoPedidos.ImagenesColumnas._ID,
+            ContratoPedidos.ImagenesColumnas.ID_REMOTA,
+            ContratoPedidos.ImagenesColumnas.IMAGEN,
+            ContratoPedidos.ImagenesColumnas.NOMBRE,
+
+    };
+
+    private static final int COLUMNA_IMG_ID = 0;
+    private static final int COLUMNA_IMG_ID_REMOTA = 1;
+    private static final int COLUMNA_IMG_IMAGEN = 2;
+    private static final int COLUMNA_IMG_NOMBRE = 3;
+
+
+    private void realizarSincronizacionLocalImagen(final SyncResult syncResult){
+        Log.i(TAG,"Actualizando Cliente Imagen");
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(
+                new JsonObjectRequest(
+                        Request.Method.GET,
+                        Constantes.GET_URL_IMG,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                procesarRespuestaGetImagen(response, syncResult);
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                try {
+                                    Log.d(TAG, error.networkResponse.toString());
+                                }catch(Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                )
+        );
+    }
+
+    private void procesarRespuestaGetImagen(JSONObject response,SyncResult syncResult){
+        Log.i(TAG,"procesarRespuestaGet Imagen");
+
+        try {
+            String estado = response.getString(Constantes.ESTADO);
+            System.out.println("ESTADO Imagen  get "+estado);
+
+            switch (estado){
+                case Constantes.SUCCESS:
+
+                    actualizarDatosLocalesImagen(response,syncResult);
+                    break;
+                case Constantes.FAILED:
+                    String mensaje = response.getString(Constantes.MENSAJE);
+                    Log.i(TAG, mensaje);
+                    break;
+            }
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void realizarSincronizacionRemotaImagen(){
+        Log.i(TAG, "Actualizando el servidor... Imagen...");
+
+        iniciarActualizacionImagen();
+
+        Cursor c = obtenerRegistrosSuciosImagen();
+
+        if (c.getCount()>0){
+            while (c.moveToNext()){
+                final int idLocal = c.getInt(COLUMNA_IMG_ID);
+
+                VolleySingleton.getInstance(getContext()).addToRequestQueue(
+                        new JsonObjectRequest(
+                                Request.Method.POST,
+                                Constantes.INSERT_URL_IMG,
+                                Utilidades.deCursorAJSONObjectImagen(c),
+                                new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        procesarRespuestaInsertImagen(response, idLocal);
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.d(TAG, "Error Volley Imagen: " + error.getMessage());
+                                    }
+                                }
+                        ){
+                            @Override
+                            public Map<String, String>getHeaders(){
+                                Map<String,String> headers = new HashMap<String, String>();
+                                headers.put("Content-Type", "application/json; charset=utf-8");
+                                headers.put("Accept", "application/json");
+                                return headers;
+                            }
+
+                            @Override
+                            public String getBodyContentType(){
+                                return "application/json; charset=utf-8" + getParamsEncoding();
+                            }
+
+                        }
+                );
+            }
+        } else {
+            Log.i(TAG, "No se requiere sincronización Imagen");
+        }
+        c.close();
+    }
+
+    private Cursor obtenerRegistrosSuciosImagen(){
+        Uri uri = ContratoPedidos.CONTENT_URI_IMG;
+        String selection = ContratoPedidos.ImagenesColumnas.PENDIENTE_INSERCION  + "=? AND "
+                + ContratoPedidos.ImagenesColumnas.ESTADO + " =?";
+        String[] selectionArgs = new String[]{"1",ContratoPedidos.ESTADO_SYNC+""};
+
+        return resolver.query(uri,PROJECTION_TIPTAB,selection,selectionArgs,null);
 
     }
+
+    private void iniciarActualizacionImagen(){
+        Uri uri = ContratoPedidos.CONTENT_URI_IMG;
+        String selection = ContratoPedidos.ImagenesColumnas.PENDIENTE_INSERCION + "=? AND "
+                + ContratoPedidos.ImagenesColumnas.ESTADO + "=?";
+        String[] selectionArgs = new String[]{"1",ContratoPedidos.ESTADO_OK+""};
+
+        ContentValues v = new ContentValues();
+        v.put(ContratoPedidos.ImagenesColumnas.ESTADO,ContratoPedidos.ESTADO_OK);
+
+        int results = resolver.update(uri,v,selection,selectionArgs);
+        Log.i(TAG, "Registros puestos en cola de inserción Pr1tab:" + results);
+    }
+
+    private void finalizarActualizacionImagen(String idRemota, int idLocal){
+        Uri uri = ContratoPedidos.CONTENT_URI_IMG;
+        String selection = ContratoPedidos.ImagenesColumnas._ID +"=?";
+        String[] selectionArgs = new String[]{String.valueOf(idLocal)};
+
+        ContentValues v = new ContentValues();
+        v.put(ContratoPedidos.ImagenesColumnas.PENDIENTE_INSERCION,"0");
+        v.put(ContratoPedidos.ImagenesColumnas.ESTADO,ContratoPedidos.ESTADO_OK);
+        v.put(ContratoPedidos.ImagenesColumnas.ID_REMOTA,idRemota);
+
+        resolver.update(uri,v,selection,selectionArgs);
+    }
+
+    private void procesarRespuestaInsertImagen(JSONObject response,int idLocal){
+
+        try {
+            String estado = response.getString(Constantes.ESTADO);
+            String mensaje = response.getString(Constantes.MENSAJE);
+            String idRemota = response.getString(Constantes.ID_IMAGENES);
+
+            System.out.println("ESTADO Imagen insert"+estado);
+
+            switch (estado){
+                case Constantes.SUCCESS:
+                    Log.i(TAG, "SUCCES Imagen "+mensaje);
+                    finalizarActualizacionImagen(idRemota,idLocal);
+                    break;
+                case Constantes.FAILED:
+                    Log.i(TAG, "FAILED Imagen "+mensaje);
+                    break;
+
+            }
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void actualizarDatosLocalesImagen(JSONObject response,SyncResult syncResult){
+        Log.i(TAG,"actualizarDatosLocales Imagen");
+        JSONArray json = null;
+
+        try {
+            json = response.getJSONArray(Constantes.TIPTAB);
+            System.out.println("JSON Imagen... " + json);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Imagenes[] res = gson.fromJson(json !=null ? json.toString() : null, Imagenes[].class);
+        List<Imagenes>data = Arrays.asList(res);
+        ArrayList<ContentProviderOperation>ops = new ArrayList<ContentProviderOperation>();
+        HashMap<String, Imagenes>expenseMap = new HashMap<String, Imagenes>();
+        for (Imagenes e : data){
+            System.out.println("variable e "+e.id);
+            expenseMap.put(e.id, e);
+            System.out.println("expenseMap "+expenseMap.values());
+        }
+        Uri uri = ContratoPedidos.CONTENT_URI_TIP;
+        String select = ContratoPedidos.Imagenes.ID_REMOTA + " IS NOT NULL";
+        Cursor c = resolver.query(uri,PROJECTION_IMAGENES,select,null,null);
+        assert c != null;
+        Log.i(TAG, "Se encontraron " + c.getCount() + " registros locales Imagen.");
+
+        String id;
+        String imagen;
+        String nombre;
+
+        while (c.moveToNext()){
+            syncResult.stats.numEntries++;
+
+            id = c.getString(COLUMNA_TIP_ID_REMOTA);
+            imagen = c.getString(COLUMNA_IMG_IMAGEN);
+            nombre = c.getString(COLUMNA_IMG_NOMBRE);
+
+            Imagenes match = expenseMap.get(id);
+            if (match!=null){
+
+                expenseMap.remove(id);
+
+                Uri existingUri = ContratoPedidos.CONTENT_URI_INVPTM.buildUpon().appendPath(id).build();
+
+                boolean b0 = match.imagen !=null && !match.imagen.equals(imagen);
+                boolean b1 = match.nombre != null && !match.nombre.equals(nombre);
+
+
+                if (b0 || b1){
+                    Log.i(TAG, "Programando actualización Imagen de: " + existingUri);
+
+                    ops.add(ContentProviderOperation.newUpdate(existingUri)
+                            .withValue(ContratoPedidos.ImagenesColumnas.IMAGEN,match.imagen)
+                            .withValue(ContratoPedidos.ImagenesColumnas.NOMBRE,match.nombre)
+                            .build());
+                    syncResult.stats.numUpdates++;
+                }else {
+                    Log.i(TAG, "No hay acciones para este registro Imagen: " + existingUri);
+                }
+            }else {
+                Uri deleteUri = ContratoPedidos.CONTENT_URI_IMG.buildUpon().appendPath(id).build();
+                Log.i(TAG, "Programando eliminación Imagen de: " + deleteUri);
+                ops.add(ContentProviderOperation.newDelete(deleteUri).build());
+                syncResult.stats.numDeletes++;
+            }
+        }
+        c.close();
+
+        System.out.println("Imagen expenseMap "+ expenseMap.values());
+        for (Imagenes e : expenseMap.values()){
+            System.out.println("Imagen DE INSERT "+e);
+            Log.i(TAG, "Programando inserción Imagen de: " + e.id);
+
+            ops.add(ContentProviderOperation.newInsert(ContratoPedidos.CONTENT_URI_IMG)
+                    .withValue(ContratoPedidos.Tipos.ID_REMOTA,e.id)
+                    .withValue(ContratoPedidos.Imagenes.IMAGEN,e.imagen)
+                    .withValue(ContratoPedidos.Imagenes.NOMBRE,e.nombre)
+                    .build());
+            syncResult.stats.numInserts++;
+        }
+
+        if (syncResult.stats.numInserts>0 ||
+                syncResult.stats.numUpdates>0 ||
+                syncResult.stats.numDeletes>0){
+            Log.i(TAG, "Aplicando operaciones Imagen...");
+            try {
+                resolver.applyBatch(ContratoPedidos.AUTORIDAD,ops);
+            }catch (RemoteException | OperationApplicationException e){
+                e.printStackTrace();
+            }
+            resolver.notifyChange(ContratoPedidos.CONTENT_URI_IMG,null,false);
+            Log.i(TAG, "Sincronización Imagen finalizada.");
+        }else {
+            Log.i(TAG, "No se requiere sincronización de Imagen");
+        }
+
+    }
+
+
+
+
+
 }

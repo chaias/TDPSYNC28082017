@@ -73,6 +73,8 @@ public class LogIn extends AppCompatActivity implements LoaderManager.LoaderCall
 
         DatabaseUtils.dumpCursor(r.query(ContratoPedidos.Pedidos.URI_CONTENIDO, null, null, null, null));
 
+      //  DatabaseUtils.dumpCursor(r.query(ContratoPedidos.Imagenes.URI_CONTENIDO, null, null, null, null));
+
         img_bnt_sync = (ImageButton)findViewById(R.id.img_bnt_sync);
         edt_usuario =  (EditText)findViewById(R.id.usuario);
         edt_password = (EditText)findViewById(R.id.password);
@@ -84,6 +86,10 @@ public class LogIn extends AppCompatActivity implements LoaderManager.LoaderCall
         adaptador = new AdaptadorDePedidos(this);
 
         Log.i("Log In","Iniciando aplicacion.... 4 ");
+        Log.i("Log In","CARGANDO LISTADO DE IMAGENES ");
+        DatabaseUtils.dumpCursor(r.query(ContratoPedidos.Pedidos.URI_CONTENIDO, null, null, null, null));
+        Log.i("Log In","LISTADO DE IMAGENES  CARGADO");
+
 
 
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.animation_button);
@@ -114,6 +120,8 @@ public class LogIn extends AppCompatActivity implements LoaderManager.LoaderCall
                 }
             }
         });
+
+        Log.i("Log In","Iniciando aplicacion.... 6 ");
 
         edt_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

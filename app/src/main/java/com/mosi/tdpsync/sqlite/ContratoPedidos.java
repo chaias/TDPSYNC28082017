@@ -201,6 +201,18 @@ public class ContratoPedidos {
 
     }
 
+    interface ColumnasImagenes {
+        String ID = "id";
+        String CODIGO = "pr1cia";
+        String IMAGEN = "pr1cod";
+        String NOMBRE = "pr1cat";
+        String ID_REMOTA = "id_remota";
+        String ESTADO = "estado";
+        String PENDIENTE_INSERCCION = "pendiente_inserccion";
+
+    }
+
+
     // [URIS]
     public static final String AUTORIDAD = "com.mosi.tdpsync";
 
@@ -222,6 +234,7 @@ public class ContratoPedidos {
     private static final String RUTA_BONIFICACIONES = "tr5tab";
     private static final String RUTA_TALONARIOS = "talonarios";
     private static final String RUTA_TIPOS = "tiptab";
+    private static final String RUTA_IMAGENES = "imagenes";
     private static final String RUTA_GASTO = "gasto";
 
    //Codigo de sincronizacion
@@ -601,6 +614,24 @@ public class ContratoPedidos {
         }
 
         public static String ObtenerIdGasto(Uri uri){
+            return uri.getPathSegments().get(1);
+        }
+
+    }
+
+    public static class Imagenes implements  ColumnasImagenes{
+        public static final Uri URI_CONTENIDO =
+                URI_BASE.buildUpon().appendPath(RUTA_IMAGENES).build();
+
+        public static Uri crearUriImagenes(String id){
+            return URI_CONTENIDO.buildUpon().appendPath(id).build();
+        }
+
+        public static String generarIdImagenes(){
+            return "IMG-"+ UUID.randomUUID().toString();
+        }
+
+        public static String ObtenerIdImagenes(Uri uri){
             return uri.getPathSegments().get(1);
         }
 
@@ -1113,5 +1144,55 @@ public class ContratoPedidos {
         }
     }
 
+
+    ////////////////////CODIGO DE SINCRONIZACION PARA LA TABLA DE IMAGENES\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    public static final String IMAGENES = "imagenes";
+
+    public static final int ALLROWS_IMG = 1;
+    public static final int SINGLE_ROW_IMG = 2;
+
+    public final static String SINGLE_MIME_IMG =
+            "vnd.android.cursor.item/vnd." + AUTORIDAD + IMAGENES;
+
+    public final static String MULTIPLE_MIME_IMG =
+            "vnd.android.cursor.dir/vnd." + AUTORIDAD + IMAGENES;
+
+    public final static Uri CONTENT_URI_IMG =
+            Uri.parse("content://" + AUTORIDAD + "/" + IMAGENES);
+
+    static {
+        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        uriMatcher.addURI(AUTORIDAD,IMAGENES,ALLROWS_IMG);
+        uriMatcher.addURI(AUTORIDAD,IMAGENES+"/#",SINGLE_ROW_IMG);
+    }
+
+    public static class ImagenesColumnas implements BaseColumns {
+
+        private ImagenesColumnas() {
+            // Sin instancias
+        }
+
+        public final static String IMAGEN  = "imagen";
+        public final static String NOMBRE  = "nombre";
+        public final static String ID_REMOTA = "id_Remota";
+        public final static String ESTADO = "estado";
+        public final static String PENDIENTE_INSERCION = "pendiente_insercion";
+
+        public static final Uri URI_CONTENIDO=
+                URI_BASE.buildUpon().appendPath(RUTA_IMAGENES).build();
+
+        public static Uri crearUriImagenes(String id){
+            return URI_CONTENIDO.buildUpon().appendPath(id).build();
+        }
+
+        public static String generarIdImagenes(){
+            return "IMG-"+ UUID.randomUUID().toString();
+        }
+
+        public static String ObtenerIdImagenes(Uri uri){
+            return uri.getPathSegments().get(1);
+        }
+    }
 
 }
