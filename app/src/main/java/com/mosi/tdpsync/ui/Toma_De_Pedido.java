@@ -128,6 +128,8 @@ public class Toma_De_Pedido extends AppCompatActivity {
             public void onClick(View view) {
                 /*Snackbar.make(view,"Mostrando Menú",Snackbar.LENGTH_SHORT)
                         .setAction("Action",null).show();*/
+                cantidadProductos();
+                //reviertecorrelativo();
                 Intent mainIntent = new Intent().setClass(
                         Toma_De_Pedido.this, insert_pedidos.class);
 
@@ -402,84 +404,20 @@ public class Toma_De_Pedido extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.cancel:
-                ContentValues newValue = new ContentValues();
-                newValue.put(ContratoPedidos.PedidosColumnas.REG_ANULADO,"Anulado");
-
-                String cuando = ContratoPedidos.PedidosColumnas.NO_PED_MOVIL + " = " + correlativo_gnr;
-
-                int afectados = getContentResolver().update(ContratoPedidos.CONTENT_URI_PED,newValue,cuando,null);
-                System.out.println("AFECTADOS " +afectados);
-
-               if (afectados>0){
-                   AlertDialog.Builder builder_cancel = new AlertDialog.Builder(Toma_De_Pedido.this,R.style.MyDialogTheme);
-
-                   builder_cancel.setTitle("Cancelacion de Pedido")
-                           .setMessage("El pedido ha sido cancelado.\n ¿Que deseas hacer?")
-                           .setPositiveButton("Nuevo Pedido",
-                                   new DialogInterface.OnClickListener() {
-                                       @Override
-                                       public void onClick(DialogInterface dialog, int which) {
-                                           Intent i = new Intent().setClass(
-                                                   Toma_De_Pedido.this, Compania_Cliente.class);
-                                           i.putExtra("usuario" , usuariologueado);
-                                           startActivity(i);
-                                           finish();
-                                       }
-                                   })
-                           .setNegativeButton("Volver al menú",
-                                   new DialogInterface.OnClickListener() {
-                                       @Override
-                                       public void onClick(DialogInterface dialog, int which) {
-                                          /* Intent i = new Intent(Toma_De_Pedido.this,Menu_Principal.class);
-                                           startActivity(i);
-                                           finish();
-                                           System.exit(0);*/
-                                           startActivity(new Intent(getBaseContext(), Menu_Principal.class)
-                                                   .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
-                                           finish();
-                                       }
-                                   });
-                   builder_cancel.create();
-                   builder_cancel.show();
-               }else{
-                   Toast fallo_cancelacion = Toast.makeText(getApplicationContext(),"El Pedido "+ correlativo_gnr + " no pude ser cancelado", Toast.LENGTH_LONG);
-                   fallo_cancelacion.show();
-               }
-
+                if (cantidadProductos()<=0){
+                   // reviertecorrelativo();
+                    cancelacionPedido();
+                }else{
+                    cancelacionPedido();
+                }
                 return true;
             case R.id.finalizar_pedido:
-                AlertDialog.Builder builder = new AlertDialog.Builder(Toma_De_Pedido.this,R.style.MyDialogTheme);
-
-                builder.setTitle("Pedido Finalizado")
-                        .setMessage("El pedido ha sido guardado.\n ¿Que deseas hacer?")
-                        .setPositiveButton("Nuevo Pedido",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent i = new Intent().setClass(
-                                                Toma_De_Pedido.this, Compania_Cliente.class);
-                                        i.putExtra("usuario" , usuariologueado);
-                                        startActivity(i);
-                                        finish();
-                                       // System.exit(0);
-                                    }
-                                })
-                        .setNegativeButton("Volver al menú",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                       /* Intent i = new Intent(Toma_De_Pedido.this,Menu_Principal.class);
-                                        startActivity(i);
-//
-                                        finish();*/
-                                        startActivity(new Intent(getBaseContext(), Menu_Principal.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
-                        finish();
-
-                                    }
-                                });
-                builder.create();
-                builder.show();
+                if (cantidadProductos()<=0){
+                  //  reviertecorrelativo();
+                    finalizarPedido();
+                }else{
+                    finalizarPedido();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -887,4 +825,117 @@ public class Toma_De_Pedido extends AppCompatActivity {
         }
 
 
-    }}
+    }
+
+    public int cantidadProductos(){
+        ContentResolver exec = getContentResolver();
+
+        String slct = ContratoPedidos.Pedidos.NO_PED_MOVIL+"=?";
+        String value[]={correlativo_gnr};
+        Cursor existentes = exec.query(ContratoPedidos.Pedidos.URI_CONTENIDO,null,slct,value,null);
+
+        int c = existentes.getCount();
+        System.out.println("Productos existentes "+ c);
+
+        return c;
+    }
+
+    public void reviertecorrelativo(){
+
+        System.out.println("correlativo antiguo " +correlativo_gnr);
+        int  r_corr = Integer.parseInt(correlativo_gnr)-1;
+        System.out.println("corrlativo -1 " + r_corr);
+
+        String n_corr = String.valueOf(r_corr);
+
+        ContentValues newValue = new ContentValues();
+        newValue.put(ContratoPedidos.TalonariosColumnas.TALCOR,n_corr);
+
+        getContentResolver().update(ContratoPedidos.CONTENT_URI_TAL,newValue,null,null);
+    }
+
+    public void finalizarPedido(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(Toma_De_Pedido.this,R.style.MyDialogTheme);
+
+        builder.setTitle("Pedido Finalizado")
+                .setMessage("El pedido ha sido guardado.\n ¿Que deseas hacer?")
+                .setPositiveButton("Nuevo Pedido",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent i = new Intent().setClass(
+                                        Toma_De_Pedido.this, Compania_Cliente.class);
+                                i.putExtra("usuario" , usuariologueado);
+                                startActivity(i);
+                                finish();
+                                // System.exit(0);
+                            }
+                        })
+                .setNegativeButton("Volver al menú",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                       /* Intent i = new Intent(Toma_De_Pedido.this,Menu_Principal.class);
+                                        startActivity(i);
+//
+                                        finish();*/
+                                startActivity(new Intent(getBaseContext(), Menu_Principal.class)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
+                                finish();
+
+                            }
+                        });
+        builder.create();
+        builder.show();
+    }
+
+    public void cancelacionPedido(){
+        ContentValues newValue = new ContentValues();
+        newValue.put(ContratoPedidos.PedidosColumnas.REG_ANULADO,"Anulado");
+
+        String cuando = ContratoPedidos.PedidosColumnas.NO_PED_MOVIL + " = " + correlativo_gnr;
+
+        int afectados = getContentResolver().update(ContratoPedidos.CONTENT_URI_PED,newValue,cuando,null);
+        System.out.println("AFECTADOS " +afectados);
+
+        if (afectados>=0){
+            AlertDialog.Builder builder_cancel = new AlertDialog.Builder(Toma_De_Pedido.this,R.style.MyDialogTheme);
+
+            builder_cancel.setTitle("Cancelacion de Pedido")
+                    .setMessage("El pedido ha sido cancelado.\n ¿Que deseas hacer?")
+                    .setPositiveButton("Nuevo Pedido",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                  //  reviertecorrelativo();
+                                    Intent i = new Intent().setClass(
+                                            Toma_De_Pedido.this, Compania_Cliente.class);
+                                    i.putExtra("usuario" , usuariologueado);
+                                    startActivity(i);
+                                    finish();
+                                }
+                            })
+                    .setNegativeButton("Volver al menú",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                          /* Intent i = new Intent(Toma_De_Pedido.this,Menu_Principal.class);
+                                           startActivity(i);
+                                           finish();
+                                           System.exit(0);*/
+                                   // reviertecorrelativo();
+                                    startActivity(new Intent(getBaseContext(), Menu_Principal.class)
+                                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
+                                    finish();
+                                }
+                            });
+            builder_cancel.create();
+            builder_cancel.show();
+        }else{
+            Toast fallo_cancelacion = Toast.makeText(getApplicationContext(),"El Pedido "+ correlativo_gnr + " no pude ser cancelado", Toast.LENGTH_LONG);
+            fallo_cancelacion.show();
+        }
+    }
+
+}
+

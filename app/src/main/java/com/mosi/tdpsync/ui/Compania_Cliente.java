@@ -75,6 +75,7 @@ public class Compania_Cliente extends AppCompatActivity {
         edt_auto_cliente.setTypeface(TF);
         bnt_siguiente.setTypeface(TF);
 
+
         usuariologueado = getIntent().getStringExtra("usuario");
 
         final ArrayList<ContentProviderOperation> ops = new ArrayList<>();
@@ -103,6 +104,7 @@ public class Compania_Cliente extends AppCompatActivity {
 
                             Toast existe = Toast.makeText(getApplicationContext(),"La compañia que usted ingreso no existe\n por favor seleccione una opcion de las sugerencias.", Toast.LENGTH_LONG);
                             existe.show();
+                            edt_auto_compania.requestFocus();
                         }else{
                             System.out.println("NOMBRE DE COMPAÑIA SELECCIONADO "+ edt_auto_compania.getText().toString());
                             String select1 = ContratoPedidos.Ciatab.CIANOMBRE +"=? ";
@@ -251,6 +253,7 @@ public class Compania_Cliente extends AppCompatActivity {
                 Toast existe = Toast.makeText(getApplicationContext(),"El cliente que usted ingreso no existe\n por favor seleccione una opcion de las sugerencias.", Toast.LENGTH_LONG);
                 existe.show();
                 edt_auto_cliente.setText("");
+                edt_auto_cliente.requestFocus();
             }else{
                 String select = ContratoPedidos.Custab.CUSNAME +"=? ";
                 String[]wheres= {edt_auto_cliente.getText().toString()};
@@ -359,9 +362,8 @@ public class Compania_Cliente extends AppCompatActivity {
 
         }
 
-        ArrayAdapter<String> adaptador
-                = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,item);
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(
+                this,R.layout.textview_spinner,item );
         sp_correlativo.setAdapter(adaptador);
 
     }
